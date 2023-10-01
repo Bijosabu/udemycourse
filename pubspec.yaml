@@ -41,8 +41,9 @@ dependencies:
   url_launcher: ^6.1.14
   permission_handler: ^11.0.0
   camera: ^0.10.5+4
-  contacts_service: ^0.6.3
   google_sign_in: ^6.1.5
+  firebase_auth: ^4.10.0
+  firebase_core: ^2.16.0
 
 dev_dependencies:
   flutter_test:

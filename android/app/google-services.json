@@ -12,7 +12,20 @@
           "package_name": "com.example.udemycourse"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "456171594984-70p39ino5delkcapqmuknbm9vhg4ctrq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.udemycourse",
+            "certificate_hash": "879f14189b62f018f47feaa17d0ec575cac0e741"
+          }
+        },
+        {
+          "client_id": "456171594984-tsh5go1bpehiq7thn9cvq65prbuphlpv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBv1IniHmUeWVxLq8uKUv6oFG3k5uwFx2k"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456171594984-tsh5go1bpehiq7thn9cvq65prbuphlpv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456171594984-hh2mege08hm8hlan9ao78v9st7cq796j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.udemycourse.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }

@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -48,25 +48,7 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({
     super.key,
   });
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final FirebaseControllers _firebaseControllers =
-      Get.put(FirebaseControllers());
-
-  void _signInAnon() async {
-    final user = (await _auth.signInAnonymously()).user;
-    if (user != null && user.isAnonymous == true) {
-      _firebaseControllers.status = 'Signed in anonymuosly' as Rx<String>;
-    } else {
-      _firebaseControllers.status = 'Sign in failed' as Rx<String>;
-    }
-  }
-
-  void signOut() async {
-    await _auth.signOut();
-    _firebaseControllers.status = 'Signed out' as Rx<String>;
-  }
-
+  final firebaseController = Get.put(FirebaseControllers());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,32 +56,48 @@ class MyHomePage extends StatelessWidget {
         title: const Text('Firebase module'),
       ),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              GetX(
-                builder: (controller) {
-                  return Text(_firebaseControllers.status.toString());
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Sign in'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Sign out'),
-                  )
-                ],
-              )
-            ],
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            GetBuilder<FirebaseControllers>(
+              builder: (firebaseController) {
+                return Column(
+                  children: [
+                    Text(firebaseController.status),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            firebaseController.signInAnon();
+                          },
+                          child: const Text('Sign in'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            firebaseController.signOut();
+                          },
+                          child: const Text('Sign out'),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          firebaseController.signInGoogle();
+                        },
+                        child: const Text(
+                          'Sign in with Google',
+                        ))
+                  ],
+                );
+              },
+            ),
+          ],
         ),
       ),
     );

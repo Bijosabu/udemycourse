@@ -9,6 +9,7 @@ class FirebaseControllers extends GetxController {
   @override
   void onInit() {
     status = 'Not authorised';
+    signInAnon();
     super.onInit();
   }
 
@@ -27,6 +28,16 @@ class FirebaseControllers extends GetxController {
     await _auth.signOut();
     status = 'Signed out';
     update();
+  }
+
+  bool ensureLoggedIn() {
+    final firebaseUser = _auth.currentUser;
+    // assert(firebaseUser != null);
+    if (firebaseUser == null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   void signInGoogle() async {
@@ -57,34 +68,4 @@ class FirebaseControllers extends GetxController {
       update();
     }
   }
-  // void _signInGoogle() async {
-  //   /*
-  //   If you are using the new version, signInWithGoogle has been depreciated
-  //   Try...
-
-  //   final AuthCredential credential = GoogleAuthProvider.getCredential(
-  //   accessToken: googleAuth.accessToken,
-  //   idToken: googleAuth.idToken,
-  //   );
-
-  //   final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
-  //   */
-
-  //   GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
-  //   GoogleSignInAuthentication googleSignInAuthentication =
-  //       await googleSignInAccount!.authentication;
-
-  //   AuthCredential credential = GoogleAuthProvider.credential(
-  //     accessToken: googleSignInAuthentication.accessToken,
-  //     idToken: googleSignInAuthentication.idToken,
-  //   );
-  //   final user = FirebaseAuth.instance.currentUser;
-  //   if (user != null && user.isAnonymous == false) {
-  //     status = 'Signed in with Google';
-  //     update();
-  //   } else {
-  //     status = 'Signed in failed';
-  //     update();
-  //   }
-  // }
 }

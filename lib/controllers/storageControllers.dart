@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:firebase_storage/firebase_storage.dart';
+// ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 import 'package:udemycourse/controllers/firebase_controllers.dart';
@@ -94,25 +95,25 @@ class StorageControllers extends GetxController {
     }
   }
 
-  // Future<String?> downloadFile(Uri location, BuildContext context) async {
-  //   try {
-  //     final data = await http.get(location);
-  //     showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return AlertDialog(
-  //           title: const Text('Downloaded'),
-  //           content: Text('FIle name is ${data.body}'),
-  //         );
-  //       },
-  //     );
-  //     return data.body;
-  //   } catch (e) {
-  //     // Handle any download errors gracefully
-  //     if (kDebugMode) {
-  //       print('Download error: $e');
-  //     }
-  //     return null;
-  //   }
-  // }
+  Future<String?> downloadFile(Uri location, BuildContext context) async {
+    try {
+      final data = await http.get(location);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Downloaded'),
+            content: Text('FIle name is ${data.body}'),
+          );
+        },
+      );
+      return data.body;
+    } catch (e) {
+      // Handle any download errors gracefully
+      if (kDebugMode) {
+        print('Download error: $e');
+      }
+      return null;
+    }
+  }
 }

@@ -84,3 +84,4 @@ class CounterDatabase extends GetxController {
     setCounter(value);
   }
 }
+//hey this is the change done on the first branch
